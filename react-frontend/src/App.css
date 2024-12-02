@@ -1,4 +1,3 @@
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -34,7 +33,9 @@
   }
 }
 
-body {font-family: Arial, Helvetica, sans-serif;}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 .navbar {
   width: 100%;
@@ -55,7 +56,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 }
 
 .active {
-  background-color: #04AA6D;
+  background-color: #04aa6d;
 }
 
 @media screen and (max-width: 500px) {
@@ -66,46 +67,53 @@ body {font-family: Arial, Helvetica, sans-serif;}
 }
 
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   width: 90%;
-  margin: 30px;
+  margin: 30px 0 0 30px;
+  height: 300px;
 }
 
+.checkoutCard {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 90%;
+  margin: 30px 0 0 30px;
+  height: 320px;
+}
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
 }
 
 .container {
   padding: 2px 16px;
-  
 }
-.product-details{
+.product-details {
   height: 150px; /* Sets the height */
   width: 200px;
   display: block;
   float: left;
   margin-bottom: 180px;
-  
 }
-.product-img{
+.product-img {
   height: 110px; /* Sets the height */
   width: 100%;
-  
 }
-.addToChartButton {
-  background-color:  #04AA6D;
+.addToCartButton {
+  background-color: #04aa6d;
   border: none;
   color: white;
   /* padding: 15px 32px; */
   text-align: center;
   text-decoration: none;
   display: inline-block;
- 
+  border-radius: 18px;
+  padding: 8px;
+  width: 100%;
 }
 
 .incrementDecrementButton {
-  background-color:  #04AA6D;
+  background-color: #04aa6d;
   border: none;
   color: white;
   /* padding: 15px 32px; */
@@ -114,11 +122,24 @@ body {font-family: Arial, Helvetica, sans-serif;}
   display: inline;
   float: left;
   margin-right: 4px;
- 
 }
 
-.checkoutButton{
-  background-color:  #04AA6D;
+.viewCartButton {
+  background-color: #04aa6d;
+  border: none;
+  color: white;
+  /* padding: 15px 32px; */
+  text-align: center;
+  text-decoration: none;
+  display: inline;
+  width: 100%;
+  border-radius: 18px;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.checkoutButton {
+  background-color: #04aa6d;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -128,8 +149,8 @@ body {font-family: Arial, Helvetica, sans-serif;}
   margin-left: 30px;
   margin-top: 10px;
 }
-.outOfStockButton{
-  background-color:  #aa0404;
+.outOfStockButton {
+  background-color: #aa0404;
   border: none;
   color: white;
   /* padding: 15px 32px; */
@@ -137,7 +158,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   text-decoration: none;
   display: inline-block;
 }
-.quantityTitle{
+.quantityTitle {
   margin-top: 0px;
 }
 table {
@@ -146,7 +167,8 @@ table {
   width: 100%;
 }
 
-td, th {
+td,
+th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
@@ -155,13 +177,12 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
-.placeOrderButton{
-  background-color:  #04AA6D;
+.placeOrderButton {
+  background-color: #04aa6d;
   border: none;
   color: white;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  
 }

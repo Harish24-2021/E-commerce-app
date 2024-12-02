@@ -43,7 +43,7 @@ function Product(props) {
           <p>Price: Rs: {props.productDetails.Price}/Piece</p>
           {!hasProductAdded ? (
             <p>
-              <button className="addToChartButton" onClick={handleAddCart}>
+              <button className="addToCartButton" onClick={handleAddCart}>
                 Add to cart
               </button>
             </p>
@@ -58,6 +58,12 @@ function Product(props) {
               </button>
 
               <h6 className="quantityTitle">Quantity Added :{quantity}</h6>
+              <button
+                className="viewCartButton"
+                onClick={() => props.handleClick("cart")}
+              >
+                View Cart
+              </button>
             </>
           )}
         </div>

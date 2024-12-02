@@ -22,10 +22,10 @@ import Teeshirt from "./Images/Teeshirt.jpg";
 import Thumpsup from "./Images/Thumpsup.png";
 import tie from "./Images/tie.jpg";
 import Tomato from "./Images/Tomato.jpg";
-import Axios from 'axios'; // Make sure to import Axios
-import { useSelector, useDispatch } from 'react-redux'
-import {setProductsData}  from '../src/Business/Store/productsSlice'
-import {productsDataSelector} from '../src/Business/Store/productsSlice'
+import Axios from "axios"; // Make sure to import Axios
+import { useSelector, useDispatch } from "react-redux";
+import { setProductsData } from "../src/Business/Store/productsSlice";
+import { productsDataSelector } from "../src/Business/Store/productsSlice";
 import Register from "./Business/Pages/Register";
 import Login from "./Business/Pages/Login";
 
@@ -216,11 +216,11 @@ const App = () => {
       }
       return product;
     });
-  
+
     // Only update state if the product list has actually changed
     setProductList(updatedProductList);
   };
-  
+
   const handleCheckout = () => {
     setNavBarKey("billing");
   };
@@ -230,8 +230,7 @@ const App = () => {
     window.location.reload();
   };
 
-  console.log(productList,  "productList");
-
+  console.log(productList, "productList");
 
   return (
     <div className="App">
@@ -243,6 +242,7 @@ const App = () => {
             index={key}
             productDetails={product}
             updateQuantity={updateQuantity}
+            handleClick={handleClick}
           />
         ))}
 
@@ -258,11 +258,20 @@ const App = () => {
         productList
           .filter((product) => product.quantity !== 0)
           .map((product, key) => (
-            <Cart key={key} index={key} productDetails={product} />
+            <Cart
+              key={key}
+              index={key}
+              productDetails={product}
+              productList={productList}
+              setProductList={setProductList}
+            />
           ))}
 
       {navBarKey === "billing" && (
-        <Billing handlePlaceOrder={handlePlaceOrder} productList={productList} />
+        <Billing
+          handlePlaceOrder={handlePlaceOrder}
+          productList={productList}
+        />
       )}
 
       {navBarKey === "addproducts" && <AddProducts />}
