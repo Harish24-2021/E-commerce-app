@@ -256,7 +256,13 @@ const App = () => {
         productList
           .filter((product) => product.quantity !== 0)
           .map((product, key) => (
-            <Cart key={key} index={key} productDetails={product} />
+            <Cart
+              key={key}
+              index={key}
+              productDetails={product}
+              productList={productList}
+              setProductList={setProductList}
+            />
           ))}
 
       {navBarKey === "billing" && (
