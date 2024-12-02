@@ -17,6 +17,7 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::post('/register', [AuthenticationController::class, 'register']);
 
+Route::post('/register', [AuthenticationController::class, 'register']);
+Route::post('/login', [AuthenticationController::class,  'login']);
 Route::post('/createProduct',[ProductController::class, 'createProduct']);

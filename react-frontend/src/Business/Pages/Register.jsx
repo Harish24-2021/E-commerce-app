@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import  Axios  from 'axios';
 
-function Register() {
+function Register({handleClick}) {
   const [formData, setFormData] = useState({
     usernameEmail: '',
     mobileNumber: '',
@@ -96,7 +96,7 @@ function Register() {
         <Box textAlign="center" marginTop="1rem">
           <Typography variant="body2">
             Already have an account?{' '}
-            <Link href="#" underline="hover">
+            <Link onClick={()=>handleClick('login')} underline="hover">
               Login here
             </Link>
           </Typography>

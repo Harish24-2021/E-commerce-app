@@ -27,6 +27,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import {setProductsData}  from '../src/Business/Store/productsSlice'
 import {productsDataSelector} from '../src/Business/Store/productsSlice'
 import Register from "./Business/Pages/Register";
+import Login from "./Business/Pages/Login";
 
 const App = () => {
   const [navBarKey, setNavBarKey] = useState("home");
@@ -189,7 +190,7 @@ const App = () => {
  const dispatch = useDispatch()
   console.log(productsData,"productsData")
   const fetchProducts =()=>{
-    Axios.get('http://localhost:8080/api/products')
+    Axios.get('http://127.0.0.1:8000/api/products')
     .then(response => {
       dispatch(setProductsData(response.data))
     })
@@ -266,7 +267,8 @@ const App = () => {
 
       {navBarKey === "addproducts" && <AddProducts />}
 
-      {navBarKey  === "register" && <Register/>}
+      {navBarKey  === "register" && <Register handleClick={handleClick}/>}
+      {navBarKey === "login" && <Login handleClick={handleClick} setNavBarKey={setNavBarKey}/>}
     </div>
   );
 };

@@ -34,6 +34,10 @@ function NavBar({ handleClick, navBarKey }) {
       >
         Register
       </a>
+      <a className={navBarKey === 'login' ? "active" : ""} onClick={() => handleClick("login")} 
+      >
+        Login
+      </a>
     </div>
   );
 }

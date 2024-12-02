@@ -36,4 +36,35 @@ class AuthenticationController extends Controller
     }
 }
 
+public function login(Request $request) {
+
+    $request->validate([
+        'email' =>'required|email',
+        'password' => 'required',
+    ]);
+
+    $user= User::where('email', $request->email )->first();
+
+    if($user && Hash::check($request->password,$user->password)){
+        $token = $user->createToken('authToken')->plainTextToken;
+        return response()->json([
+           'message' => 'Logged in successfully',
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+        ]);
+    } else {
+        if(!$user) {
+            return response()->json([
+                'message' => 'User does  not exist',
+             ], 401);
+        }
+        return response()->json([
+            'message' => 'Wrong password'
+        ], 401);
+
+    }
+
+
+
+    }
 }
