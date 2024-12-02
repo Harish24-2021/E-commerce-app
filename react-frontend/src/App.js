@@ -22,10 +22,10 @@ import Teeshirt from "./Images/Teeshirt.jpg";
 import Thumpsup from "./Images/Thumpsup.png";
 import tie from "./Images/tie.jpg";
 import Tomato from "./Images/Tomato.jpg";
-import Axios from 'axios'; // Make sure to import Axios
-import { useSelector, useDispatch } from 'react-redux'
-import {setProductsData}  from '../src/Business/Store/productsSlice'
-import {productsDataSelector} from '../src/Business/Store/productsSlice'
+import Axios from "axios"; // Make sure to import Axios
+import { useSelector, useDispatch } from "react-redux";
+import { setProductsData } from "../src/Business/Store/productsSlice";
+import { productsDataSelector } from "../src/Business/Store/productsSlice";
 import Register from "./Business/Pages/Register";
 
 const App = () => {
@@ -185,23 +185,22 @@ const App = () => {
       quantity: 0,
     },
   ]);
-  const {productsData} = useSelector(productsDataSelector)
- const dispatch = useDispatch()
-  console.log(productsData,"productsData")
-  const fetchProducts =()=>{
-    Axios.get('http://localhost:8080/api/products')
-    .then(response => {
-      dispatch(setProductsData(response.data))
-    })
-    .catch((error)=>{
-       console.log(error);
-     
-    })
-  }
-   useEffect(()=> {
-     fetchProducts()
-   },[])
-   
+  const { productsData } = useSelector(productsDataSelector);
+  const dispatch = useDispatch();
+  console.log(productsData, "productsData");
+  const fetchProducts = () => {
+    Axios.get("http://localhost:8080/api/products")
+      .then((response) => {
+        dispatch(setProductsData(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   const handleClick = (index) => {
     setNavBarKey(index);
     if (index === "logout") {
@@ -215,11 +214,11 @@ const App = () => {
       }
       return product;
     });
-  
+
     // Only update state if the product list has actually changed
     setProductList(updatedProductList);
   };
-  
+
   const handleCheckout = () => {
     setNavBarKey("billing");
   };
@@ -229,8 +228,7 @@ const App = () => {
     window.location.reload();
   };
 
-  console.log(productList,  "productList");
-
+  console.log(productList, "productList");
 
   return (
     <div className="App">
@@ -242,6 +240,7 @@ const App = () => {
             index={key}
             productDetails={product}
             updateQuantity={updateQuantity}
+            handleClick={handleClick}
           />
         ))}
 
@@ -261,12 +260,15 @@ const App = () => {
           ))}
 
       {navBarKey === "billing" && (
-        <Billing handlePlaceOrder={handlePlaceOrder} productList={productList} />
+        <Billing
+          handlePlaceOrder={handlePlaceOrder}
+          productList={productList}
+        />
       )}
 
       {navBarKey === "addproducts" && <AddProducts />}
 
-      {navBarKey  === "register" && <Register/>}
+      {navBarKey === "register" && <Register />}
     </div>
   );
 };
