@@ -15,7 +15,7 @@ function Product(props) {
   };
 
   let increment = () => {
-    if (quantity < props.productDetails.quantityAvailable) {
+    if (quantity <= props.productDetails.quantity) {
       setquantity(quantity + 1);
     }
   };
@@ -38,9 +38,9 @@ function Product(props) {
         <img className="product-img" src={props.productDetails.image} alt="" />
         <div class="container">
           <h4>
-            <b>{props.productDetails.name}</b>
+            <b>{props.productDetails.name.slice(0,20)+'...'}</b>
           </h4>
-          <p>Price: Rs: {props.productDetails.Price}/Piece</p>
+          <p>Price: Rs: { props.productDetails.price}/Piece</p>
           {!hasProductAdded ? (
             <p>
               <button className="addToCartButton" onClick={handleAddCart}>
@@ -58,12 +58,12 @@ function Product(props) {
               </button>
 
               <h6 className="quantityTitle">Quantity Added :{quantity}</h6>
-              <button
+              {/* <button
                 className="viewCartButton"
                 onClick={() => props.handleClick("cart")}
               >
                 View Cart
-              </button>
+              </button> */}
             </>
           )}
         </div>

@@ -22,3 +22,4 @@ Route::post('/register', [AuthenticationController::class, 'register']);
 Route::post('/login', [AuthenticationController::class,  'login']);
 Route::post('/createProduct',[ProductController::class, 'createProduct']);
 Route::get('/fetchAmazonProducts', [ProductController::class,  'fetchAmazonProducts']);
+Route::get('/products', [ProductController::class, 'getProducts']);

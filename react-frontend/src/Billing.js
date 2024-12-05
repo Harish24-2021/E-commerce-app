@@ -24,23 +24,23 @@ let totalAmount=0,sno=0
                             <th>Quantity</th>
                             <th>Amount</th>
                         </tr>
-                        {props.productList ? Object.keys(props.productList).map(key1 => {
+                        {props.productsData ? Object.keys(props.productsData).map(key1 => {
                             
 
                             let key = Number(key1)
                            
-                            if (props.productList[key] && props.productList[key]['quantity'] !== 0) {
-                                totalAmount=totalAmount+props.productList[key].quantity * props.productList[key].Price
+                            if (props.productsData[key] && props.productsData[key]['quantity'] !== 0) {
+                                totalAmount=totalAmount+props.productsData[key].quantity * props.productsData[key].price
                                 sno=sno+1
  console.log(key)
-console.log(props.productList[key])
-console.log(props.productList)
+console.log(props.productsData[key])
+console.log(props.productsData)
                              return <tr>
                                     <td>{sno}</td>
-                                    <td>{props.productList[key].name}</td>
-                                    <td>{props.productList[key].Price}</td>
-                                    <td>{props.productList[key].quantity}</td>
-                                    <td>Rs. {props.productList[key].quantity * props.productList[key].Price}</td>
+                                    <td>{props.productsData[key].name}</td>
+                                    <td>{props.productsData[key].price}</td>
+                                    <td>{props.productsData[key].quantity}</td>
+                                    <td>Rs. {props.productsData[key].quantity * props.productsData[key].price}</td>
                                 </tr>
 
                             }

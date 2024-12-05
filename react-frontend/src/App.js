@@ -186,13 +186,14 @@ const App = () => {
       quantity: 0,
     },
   ]);
-  const {productsData} = useSelector(productsDataSelector)
+  const productsData = useSelector(productsDataSelector)
  const dispatch = useDispatch()
-  console.log(productsData,"productsData")
   const fetchProducts =()=>{
     Axios.get('http://127.0.0.1:8000/api/products')
-    .then(response => {
-      dispatch(setProductsData(response.data))
+    .then((response) => {
+      console.log(response['data']['data'],"response")
+      
+      dispatch(setProductsData(response['data']['data']))
     })
     .catch((error)=>{
        console.log(error);
@@ -210,15 +211,15 @@ const App = () => {
     }
   };
   const updateQuantity = (id, quantity) => {
-    const updatedProductList = productList.map((product) => {
+    const updatedProductList = productsData?.map((product) => {
       if (product.id === id && product.quantity !== quantity) {
-        return { ...product, quantity };
+        return { ...product, quantity: quantity };
       }
       return product;
     });
 
     // Only update state if the product list has actually changed
-    setProductList(updatedProductList);
+    dispatch(setProductsData(updatedProductList))
   };
 
   const handleCheckout = () => {
@@ -230,13 +231,14 @@ const App = () => {
     window.location.reload();
   };
 
-  console.log(productList, "productList");
+  console.log(productsData, "productList");
+  console.log(productsData,"productsData")
 
   return (
     <div className="App">
       <NavBar handleClick={handleClick} navBarKey={navBarKey} />
       {navBarKey === "home" &&
-        productList.map((product, key) => (
+        productsData?.map((product, key) => (
           <Product
             key={product.id}
             index={key}
@@ -255,22 +257,23 @@ const App = () => {
       )}
 
       {navBarKey === "cart" &&
-        productList
-          .filter((product) => product.quantity !== 0)
+        productsData?.filter((product) => product.quantity !== 0)
           .map((product, key) => (
             <Cart
               key={key}
               index={key}
               productDetails={product}
-              productList={productList}
-              setProductList={setProductList}
+              productsData={productsData}
+
             />
-          ))}
+          )) 
+          
+          }
 
       {navBarKey === "billing" && (
         <Billing
           handlePlaceOrder={handlePlaceOrder}
-          productList={productList}
+          productsData={productsData}
         />
       )}
 
