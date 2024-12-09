@@ -189,11 +189,11 @@ const App = () => {
   const productsData = useSelector(productsDataSelector)
  const dispatch = useDispatch()
   const fetchProducts =()=>{
-    Axios.get('http://127.0.0.1:8000/api/products')
+    Axios.get('http://localhost:8080/api/products')
     .then((response) => {
-      console.log(response['data']['data'],"response")
+      console.log(response.data,"response")
       
-      dispatch(setProductsData(response['data']['data']))
+      dispatch(setProductsData(response['data']))
     })
     .catch((error)=>{
        console.log(error);
