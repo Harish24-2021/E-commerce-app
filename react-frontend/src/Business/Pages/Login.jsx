@@ -2,18 +2,24 @@ import React, { useState } from "react";
 import { Box, TextField, Button, Typography, Link } from "@mui/material";
 import  Axios  from "axios";
 
+
 const Login = ({setNavBarKey,handleClick}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error,setError] =useState('')
+  const [token, setToken] = useState("");
+  console.log(process.env.LARAVEL_SERVER_PORT_URL)
   const handleSubmit = (event) => {
     event.preventDefault();
-    Axios.post('http://127.0.0.1:8000/api/login', {
+    Axios.post(`${process.env.REACT_APP_SPRINGBOOT_SERVER_PORT_URL}/api/login`, {
       email: email,
       password: password
     })
     .then(response => {
       if(response.status === 200) {
+        console.log(response);
+        setToken(response.data.access_token);
+        localStorage.setItem('token' ,response.data.access_token)
         setNavBarKey('home')
       }
     })

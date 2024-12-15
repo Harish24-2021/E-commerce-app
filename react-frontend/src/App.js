@@ -189,7 +189,11 @@ const App = () => {
   const productsData = useSelector(productsDataSelector)
  const dispatch = useDispatch()
   const fetchProducts =()=>{
-    Axios.get('http://localhost:8080/api/products')
+    Axios.get('http://localhost:8080/api/products', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
     .then((response) => {
       console.log(response.data,"response")
       
@@ -281,6 +285,9 @@ const App = () => {
 
       {navBarKey  === "register" && <Register handleClick={handleClick}/>}
       {navBarKey === "login" && <Login handleClick={handleClick} setNavBarKey={setNavBarKey}/>}
+      
+      {navBarKey}
+   
     </div>
   );
 };

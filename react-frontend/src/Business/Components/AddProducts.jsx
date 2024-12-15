@@ -26,7 +26,14 @@ const AddProducts = () => {
     e.preventDefault();
     console.log('Form Values:', formValues); // Log the values
   
-    Axios.post('http://127.0.0.1:8000/api/createProduct', formValues)
+    Axios.post('http://127.0.0.1:8000/api/createProduct', formValues, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token'), // Add your token here
+
+
+      },
+    })
       .then((response) => {
         if (response.status === 200) {
           console.log(response);

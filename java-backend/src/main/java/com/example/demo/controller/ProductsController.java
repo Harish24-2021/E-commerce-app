@@ -6,8 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.beans.factory.annotation.Value;
 
-import java.util.HashMap;
+
+
+
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +18,7 @@ import java.util.Map;
 @RequestMapping("/api/products")
 @CrossOrigin(origins = "http://localhost:3000")
 public class ProductsController {
+
 
     @Autowired
     private ProductsRepository productRepository;
@@ -72,13 +76,9 @@ public class ProductsController {
 
     // Get All Products
     @GetMapping
-    public ResponseEntity<Map<String,Object>> getProducts() {
+    public ResponseEntity<List<Products>> getProducts() {
         List<Products> products =productRepository.findAll(); 
-         Map<String, Object> response = new HashMap<>();
-        response.put("data", products);
-
-        return ResponseEntity.ok(response);    
-
+        return ResponseEntity.ok(products);
     }
     
 }

@@ -1,6 +1,10 @@
 import './App.css';
 
 function NavBar({ handleClick, navBarKey }) {
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    window.location.href = '/login'
+}
   return (
     <div className="navbar">
       <a 
@@ -38,6 +42,8 @@ function NavBar({ handleClick, navBarKey }) {
       >
         Login
       </a>
+      <a className={navBarKey === 'logout' ? "active" : ""} onClick={() => handleLogout()}
+      >Logout</a>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 public class Products  {
    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     @Column(nullable = false)
