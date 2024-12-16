@@ -1,17 +1,20 @@
+import Axios from "axios"; // Make sure to import Axios
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { productsDataSelector, setProductsData } from "../src/Business/Store/productsSlice";
 import "./App.css";
-import NavBar from "./NavBar";
-import Product from "./Product";
-import Cart from "./Cart";
 import Billing from "./Billing";
 import AddProducts from "./Business/Components/AddProducts";
-import Banana from "./Images/Banana.png";
-import Mango from "./Images/Mango.jpg";
+import Login from "./Business/Pages/Login";
+import Register from "./Business/Pages/Register";
+import Cart from "./Cart";
 import Apple from "./Images/Apple.jpg";
+import Banana from "./Images/Banana.png";
 import brinjal from "./Images/brinjal.jpg";
 import coconutOil from "./Images/coconutOil.jpg";
 import drumstick from "./Images/drumstick.png";
 import FormalShirt from "./Images/FormalShirt.jpg";
+import Mango from "./Images/Mango.jpg";
 import mazza from "./Images/mazza.jpg";
 import oranges from "./Images/oranges.jpg";
 import ponds from "./Images/ponds.jpg";
@@ -22,12 +25,8 @@ import Teeshirt from "./Images/Teeshirt.jpg";
 import Thumpsup from "./Images/Thumpsup.png";
 import tie from "./Images/tie.jpg";
 import Tomato from "./Images/Tomato.jpg";
-import Axios from "axios"; // Make sure to import Axios
-import { useSelector, useDispatch } from "react-redux";
-import { setProductsData } from "../src/Business/Store/productsSlice";
-import { productsDataSelector } from "../src/Business/Store/productsSlice";
-import Register from "./Business/Pages/Register";
-import Login from "./Business/Pages/Login";
+import NavBar from "./NavBar";
+import Product from "./Product";
 
 const App = () => {
   const [navBarKey, setNavBarKey] = useState("home");
@@ -188,8 +187,9 @@ const App = () => {
   ]);
   const productsData = useSelector(productsDataSelector)
  const dispatch = useDispatch()
+ console.log(localStorage.getItem('token') )
   const fetchProducts =()=>{
-    Axios.get('http://localhost:8080/api/products', {
+    Axios.get(`${process.env.REACT_APP_SPRINGBOOT_SERVER_PORT_URL}/api/products`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
@@ -286,7 +286,6 @@ const App = () => {
       {navBarKey  === "register" && <Register handleClick={handleClick}/>}
       {navBarKey === "login" && <Login handleClick={handleClick} setNavBarKey={setNavBarKey}/>}
       
-      {navBarKey}
    
     </div>
   );

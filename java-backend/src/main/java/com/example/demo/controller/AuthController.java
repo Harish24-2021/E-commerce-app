@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.dto.LoginRequest;
 import com.example.demo.entity.Users;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.security.util.JWTUtil;
 import com.example.demo.security.util.JwtTokenUtil;
 
 @RestController
@@ -23,7 +24,7 @@ public class AuthController {
     private UserRepository userRepository;
 
     @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private JWTUtil jwtUtil;
 
     // Authenticate User and Generate JWT Token
     @PostMapping("/login")
@@ -31,11 +32,13 @@ public class AuthController {
         System.out.println(loginRequest);
         Users user = userRepository.findByUsername(loginRequest.getUsername()) .orElse(null);;
        System.out.print("Authenticating");
+       
         if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
-            String token = jwtTokenUtil.generateToken(user.getUsername());
+            String token = jwtUtil.generateToken(user.getUsername());
             
             Map<String, String> response = new HashMap<>();
             response.put("token", token);
+            System.out.println("Generated JWT Token: " + token);
 
             return ResponseEntity.ok(response);
         } else {

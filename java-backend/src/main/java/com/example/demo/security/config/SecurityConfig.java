@@ -20,24 +20,34 @@ public class SecurityConfig {
     private final UserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    // Constructor Injection
     public SecurityConfig(UserDetailsService userDetailsService, JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
+    // Define the Security Filter Chain
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/api/auth/**").permitAll() // Allow authentication endpoints
-                .anyRequest().authenticated()
-                .and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+        http
+            .csrf().disable()  // Disable CSRF
+            .cors()  // Enable CORS support
+            .and()
+            .authorizeRequests()
+            .requestMatchers("/api/auth/login").permitAll() 
+            .requestMatchers("/products/**").authenticated() // Allow access to the login endpoint
+            .anyRequest().authenticated()  // All other requests require authentication
+            .and()
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS);  // Use stateless sessions
+
+        // Add JWT Authentication Filter
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
     }
 
+    // Define Authentication Manager
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
@@ -47,6 +57,7 @@ public class SecurityConfig {
                 .build();
     }
 
+    // Password Encoder Bean
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
