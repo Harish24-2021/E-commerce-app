@@ -1,6 +1,7 @@
 import { Box, Button, Link, TextField, Typography } from "@mui/material";
 import Axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 
 
 const Login = ({setNavBarKey,handleClick}) => {
@@ -8,6 +9,7 @@ const Login = ({setNavBarKey,handleClick}) => {
   const [password, setPassword] = useState("");
   const [error,setError] =useState('')
   const [token, setToken] = useState("");
+  const navigate = useNavigate()
   console.log(process.env.LARAVEL_SERVER_PORT_URL)
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -18,9 +20,9 @@ const Login = ({setNavBarKey,handleClick}) => {
     .then(response => {
       if(response.status === 200) {
         console.log(response);
-        setToken(response.data.access_token);
+        setToken(response.data.token);
         localStorage.setItem('token' ,response.data.token)
-        setNavBarKey('home')
+        navigate("/products")
       }
     })
     .catch((error)=>{
