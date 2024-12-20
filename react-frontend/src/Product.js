@@ -38,10 +38,8 @@ function Product(props) {
   };
 
   let increment = (product) => {
-    if (quantity <=product.quantity) {
-      setquantity(quantity + 1);
-      updateQuantity(product.id, quantity+1);
-    }
+      updateQuantity(product.id, product.quantity+1);
+    
   };
 
   const updateQuantity = (id, quantity) => {
@@ -58,11 +56,9 @@ function Product(props) {
 
   let decrement = (product) => {
     if (product.quantity > 1) {
-      setquantity(quantity - 1);
-      updateQuantity(product.id, quantity-1);
+      updateQuantity(product.id, product.quantity-1);
     } else if (product.quantity === 1) {
-      setquantity(quantity - 1);
-      updateQuantity(product.id, quantity-1);
+      updateQuantity(product.id, product.quantity-1);
       sethasProductAdded(false);
     }
   };
@@ -95,7 +91,7 @@ function Product(props) {
                     -
                   </button>
     
-                  <h6 className="quantityTitle">Quantity Added :{quantity}</h6>
+                  <h6 className="quantityTitle">Quantity Added :{product.quantity}</h6>
                   {/* <button
                     className="viewCartButton"
                     onClick={() => props.handleClick("cart")}
