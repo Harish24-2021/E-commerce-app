@@ -1,9 +1,10 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
-import { setProductsData } from "./Business/Store/productsSlice";
+import { productsDataSelector, setProductsData } from "./Business/Store/productsSlice";
 
-const Cart = ({ productDetails, productsData, setProductList }) => {
-  const { image, name, price, quantity, id } = productDetails;
+const Cart = ({ productDetails }) => {
+  const productsData = useSelector(productsDataSelector)
+  const { image, name, price, quantity, id } = productsData;
   const dispatch = useDispatch();
 
   const handleRemoveProduct = () => {
@@ -14,22 +15,27 @@ const Cart = ({ productDetails, productsData, setProductList }) => {
  
   };
   return (
-    <div className="product-details">
+    productsData?.map((product,index)=> {
+      return(
+      <div className="product-details">
       <div className="checkoutCard">
-        <img className="product-img" src={image} alt={name} />
+        <img className="product-img" src={product?.image} alt={product?.name} />
         <div className="container">
           <h4>
             <b>{name?.slice(0,30)+ "..."}</b>
           </h4>
-          <p>Price Rs: {price}/Piece</p>
-          <p>Quantity Added: {quantity}</p>
-          <p>Cost: {quantity * price}</p>
+          <p>Price Rs: {product?.price}/Piece</p>
+          <p>Quantity Added: {product?.quantity}</p>
+          <p>Cost: {product?.quantity * product?.price}</p>
           <button className="viewCartButton" onClick={handleRemoveProduct}>
             Delete
           </button>
         </div>
       </div>
     </div>
+      )
+    })
+
   );
 };
 
