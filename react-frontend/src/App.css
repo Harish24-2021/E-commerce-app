@@ -57,6 +57,19 @@ body {
 
 .active {
   background-color: #04aa6d;
+  padding: 6px;
+  border-radius: 5px;
+}
+.navElement {
+  height: 20px;
+  width:'fit-content';
+  margin: 0 10px;
+  border: 0 10px;
+  padding: 5px;
+  border-radius: 1px;
+}
+.navElement:hover {
+  outline: 2px solid #fff;
 }
 
 @media screen and (max-width: 500px) {
@@ -189,4 +202,32 @@ tr:nth-child(even) {
   text-align: center;
   text-decoration: none;
   display: inline-block;
+}
+.navigationBar {
+  background-color: #555;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content:flex-start;
+    height: 39px;
+    width: 100%;
+    background-color: #232f3e;
+    color: white;
+    font-family: "Amazon Ember",Arial,sans-serif;
+}
+.cartButton {  
+  background-image: url(https://m.media-amazon.com/images/G/31/gno/sprites/nav-sprite-global-2x-reorg-privacy._CB541718031_.png);
+  background-size: 350px;
+  background-position: -10px -340px;
+  width: 38px;
+  height: 26px;
+  position: absolute;
+  right: 10%;
+}
+.cartText {
+  position: absolute;
+  right: 8%;
+  white-space: nowrap;
+  clear: both;
+  top:14px;
 }
