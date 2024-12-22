@@ -39,8 +39,11 @@ const NavBar = () => {
       {/* <div className={activePage === login ? 'navElement active':'navElement'}onClick={()=>navigator(login)}>Login</div> */}
       {/* <div className={activePage === register ? 'navElement active':'navElement'} onClick={()=>navigator(register)}>Register</div>         */}
       <div className="navElement singoutButton" onClick={signoutHandler}>Sign Out</div>
+      <div  className="cartButtoncontainer" onClick={()=>navigator(cart)}>
       <span className="cartButton"></span>
       <span className="cartText">Cart</span>
+      </div>
+
     </div>
 
   );
