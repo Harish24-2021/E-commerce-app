@@ -1,23 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import "../../App.css";
 import { cart, checkout, login, products } from "../../util/constants";
 
 const NavBar = () => {
   const [activePage, setActivePage] = useState(login);
-  const naviate = useNavigate();
+  const navigate = useNavigate();
 
+  const isLoggedIn = ()=> {
+    return localStorage.getItem("token");
+  }
+  useEffect(()=>{
+    if(!isLoggedIn) {
+      console.log(isLoggedIn, "isloggedin")
+      navigate("/login");
+    }
+  },[navigate])
+  
   const navigator = (route) => {
-    naviate(`/${route}`);
+    navigate(`/${route}`);
     setActivePage(route);
   };
   const signoutHandler = () => {
    localStorage.removeItem("token");
-   naviate ("/login");
+   navigate ("/");
   };
+
 
   return (
     <div className="navigationBar">
+
       <div
         className={activePage === products ? "navElement active" : "navElement"}
         onClick={() => navigator(products)}

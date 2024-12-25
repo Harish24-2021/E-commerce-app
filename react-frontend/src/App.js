@@ -1,10 +1,9 @@
-import Axios from "axios"; // Make sure to import Axios
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { productsDataSelector, setProductsData } from "../src/Business/Store/productsSlice";
+import NavBar from "../src/Business/Components/NavBar";
+import { productsDataSelector } from "../src/Business/Store/productsSlice";
 import "./App.css";
 import RoutesConfig from "./Business/RoutesConfig";
-import NavBar from "../src/Business/Components/NavBar";
 
 const App = () => {
   const [navBarKey, setNavBarKey] = useState("home");
@@ -28,13 +27,8 @@ const productsData = useSelector(productsDataSelector)
     setNavBarKey("billing");
   };
 
-  const handlePlaceOrder = () => {
-    alert("Order placed..Thank you for shopping");
-    window.location.reload();
-  };
+ 
 
-  console.log(productsData, "productList");
-  console.log(productsData,"productsData")
 
   return (
 
