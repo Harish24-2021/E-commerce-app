@@ -56,25 +56,43 @@ function Product() {
   };
 
   let increment = (product) => {
-    updateQuantity(product.id, product.quantity + 1);
+    updateQuantity(product.id, product.cartQuantity + 1);
   };
 
-  const updateQuantity = (id, quantity) => {
+  const updateQuantity = (id, cartQuantity) => {
     console.log(productsData, "productsdata");
     const updatedProductList = productsData?.map((product) => {
-      if (product.id === id && product.quantity !== quantity) {
-        return { ...product, quantity: quantity };
+      if (product.id === id && product.cartQuantity !== cartQuantity) {
+        return { ...product, cartQuantity: cartQuantity };
       }
       return product;
     });
     dispatch(setProductsData(updatedProductList));
+    Axios.post(`${process.env.REACT_APP_SPRINGBOOT_SERVER_PORT_URL}/api/cartData`,
+      [{
+        "productId": String(id),
+        "quantity": cartQuantity
+      }] ,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+         
+      
+    )
+    .catch(
+      (error) => {
+        console.log(error);
+      }
+    )
   };
 
   let decrement = (product) => {
-    if (product.quantity > 1) {
-      updateQuantity(product.id, product.quantity - 1);
-    } else if (product.quantity === 1) {
-      updateQuantity(product.id, product.quantity - 1);
+    if (product.cartQuantity > 1) {
+      updateQuantity(product.id, product.cartQuantity - 1);
+    } else if (product.cartQuantity === 1) {
+      updateQuantity(product.id, product.cartQuantity - 1);
     }
   };
 
@@ -89,8 +107,8 @@ function Product() {
                 <h4>
                   <b>{product.name.slice(0, 20) + "..."}</b>
                 </h4>
-                <p>Price: Rs: {product.price}/Piece</p>
-                {product?.isAddedToCart == false ? (
+                <p>Price: ₹{product.price}</p>
+                {!product?.cartQuantity ? (
                   <p>
                     <button
                       className="addToCartButton"
@@ -116,7 +134,7 @@ function Product() {
                     </button>
 
                     <h6 className="quantityTitle">
-                      Quantity Added :{product.quantity}
+                      Quantity Added :{product.cartQuantity}
                     </h6>
                     {/* <button
                     className="viewCartButton"

@@ -31,11 +31,11 @@ function Billing(props) {
 
                   if (
                     
-                    product["quantity"] !== 0
+                    product["cartQuantity"] !== 0
                   ) {
                     totalAmount =
                       totalAmount +
-                      product.quantity * product.price;
+                      product.cartQuantity * product.price;
                     sno = sno + 1;
 
                     console.log(productsData);
@@ -44,10 +44,10 @@ function Billing(props) {
                         <td>{sno}</td>
                         <td>{product.name}</td>
                         <td>{product.price}</td>
-                        <td>{product.quantity}</td>
+                        <td>{product.cartQuantity}</td>
                         <td>
                           Rs.{" "}
-                          {product.quantity * product.price}
+                          {product.cartQuantity * product.price}
                         </td>
                       </tr>
                     );
