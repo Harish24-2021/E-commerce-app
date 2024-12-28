@@ -8,7 +8,7 @@ import {
 
 const Cart = ({ productDetails }) => {
   const productsData = useSelector(productsDataSelector);
-  const { image, name, price, quantity, id } = productsData;
+  const { image, name, price, cartQuantity, id } = productsData;
   const dispatch = useDispatch();
 
   const handleRemoveProduct = () => {
@@ -20,15 +20,15 @@ const Cart = ({ productDetails }) => {
 
   let increment = (product) => {
     console.log("20")
-    updateQuantity(product.id, product.quantity + 1);
+    updateQuantity(product.id, product.cartQuantity + 1);
   };
 
-  const updateQuantity = (id, quantity) => {
+  const updateQuantity = (id, cartQuantity) => {
     console.log("26")
     
     const updatedProductList = productsData?.map((product) => {
-      if (product.id === id && product.quantity !== quantity) {
-        return { ...product, quantity: quantity };
+      if (product.id === id && product.cartQuantity !== cartQuantity) {
+        return { ...product, cartQuantity: cartQuantity };
       }
       return product;
     });
@@ -37,14 +37,14 @@ const Cart = ({ productDetails }) => {
   };
 
   let decrement = (product) => {
-    if (product.quantity > 1) {
-      updateQuantity(product.id, product.quantity - 1);
-    } else if (product.quantity === 1) {
-      updateQuantity(product.id, product.quantity - 1);
+    if (product.cartQuantity > 1) {
+      updateQuantity(product.id, product.cartQuantity - 1);
+    } else if (product.cartQuantity === 1) {
+      updateQuantity(product.id, product.cartQuantity - 1);
     }
   };
   return productsData?.map((product, index) => {
-    return product.quantity ? (
+    return product.cartQuantity ? (
       <div className="">
         <div className="checkoutCard">
           <img
@@ -57,7 +57,7 @@ const Cart = ({ productDetails }) => {
               <b>{product?.name}</b>
             </h4>
             <p>Price Rs: {product?.price}/Piece</p>
-            <p>Cost: {product?.quantity * product?.price}</p>
+            <p>Cost: {product?.cartQuantity * product?.price}</p>
            
 
             <div class="counter-button">
@@ -67,7 +67,7 @@ const Cart = ({ productDetails }) => {
               >
                 -
               </button>
-              <span class="quantityValue">{product?.quantity}</span>
+              <span class="quantityValue">{product?.cartQuantity}</span>
               <button
                 class="quantityButton plus"
                 onClick={() => increment(product, productsData)}
