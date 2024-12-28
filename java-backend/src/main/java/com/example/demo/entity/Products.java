@@ -2,6 +2,9 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 @Entity
 @Table(name = "products")
+/**
+ * The class "Products" represents products with an id, name, and price attributes.
+ */
 
 public class Products  {
    @Id

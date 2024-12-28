@@ -141,6 +141,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 18px;
   padding: 8px;
   width: 100%;
+  cursor: pointer;
 }
 
 .incrementDecrementButton {
@@ -153,6 +154,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   display: inline;
   float: left;
   margin-right: 4px;
+  cursor: pointer;
 }
 
 .viewCartButton {
@@ -179,6 +181,7 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   display: inline-block;
   margin-left: 30px;
   margin-top: 10px;
+  cursor: pointer;
 }
 .outOfStockButton {
   background-color: #aa0404;

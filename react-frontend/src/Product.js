@@ -68,6 +68,24 @@ function Product() {
       return product;
     });
     dispatch(setProductsData(updatedProductList));
+    Axios.post(`${process.env.REACT_APP_SPRINGBOOT_SERVER_PORT_URL}/api/cartData`,
+      [{
+        "productId": String(id),
+        "quantity": quantity
+      }] ,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+         
+      
+    )
+    .catch(
+      (error) => {
+        console.log(error);
+      }
+    )
   };
 
   let decrement = (product) => {
@@ -89,7 +107,7 @@ function Product() {
                 <h4>
                   <b>{product.name.slice(0, 20) + "..."}</b>
                 </h4>
-                <p>Price: Rs: {product.price}/Piece</p>
+                <p>Price: ₹{product.price}</p>
                 {product?.isAddedToCart == false ? (
                   <p>
                     <button

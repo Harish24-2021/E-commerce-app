@@ -1,3 +1,4 @@
+import { Axios } from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import {
@@ -18,17 +19,19 @@ const Cart = ({ productDetails }) => {
   };
 
   let increment = (product) => {
+    console.log("20")
     updateQuantity(product.id, product.quantity + 1);
   };
 
   const updateQuantity = (id, quantity) => {
+    console.log("26")
+    
     const updatedProductList = productsData?.map((product) => {
       if (product.id === id && product.quantity !== quantity) {
         return { ...product, quantity: quantity };
       }
       return product;
     });
-
     // Only update state if the product list has actually changed
     dispatch(setProductsData(updatedProductList));
   };

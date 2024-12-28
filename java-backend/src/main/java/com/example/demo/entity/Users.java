@@ -6,6 +6,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "users")
 public class Users {
+    // The code snippet you provided is defining a Java entity class called `Users` using JPA
+    // annotations.
     @Id
     private String username;
     private String password;
