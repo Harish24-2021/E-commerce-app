@@ -2,18 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import "../../App.css";
 import { cart, checkout, login, products } from "../../util/constants";
+import { useSelector } from "react-redux";
+import { productsDataSelector } from "../Store/productsSlice";
+import { CartCount } from "../../Presentation/NavBar";
 
 const NavBar = () => {
   const [activePage, setActivePage] = useState(login);
   const navigate = useNavigate();
-
+  const productsData = useSelector(productsDataSelector);
+  
   const isLoggedIn = ()=> {
     return localStorage.getItem("token");
   }
   useEffect(()=>{
     if(!isLoggedIn) {
       console.log(isLoggedIn, "isloggedin")
-      navigate("/login");
+      navigate("/");
     }
   },[navigate])
   
@@ -25,6 +29,14 @@ const NavBar = () => {
    localStorage.removeItem("token");
    navigate ("/");
   };
+
+  const getTotalCartQuantity = () => {
+    let totalCartQuantityCount = 0;
+    productsData?.map((product) =>{
+      totalCartQuantityCount += product?.cartQuantity
+    })
+    return totalCartQuantityCount;
+  }
 
 
   return (
@@ -52,6 +64,7 @@ const NavBar = () => {
       {/* <div className={activePage === register ? 'navElement active':'navElement'} onClick={()=>navigator(register)}>Register</div>         */}
       <div className="navElement singoutButton" onClick={signoutHandler}>Sign Out</div>
       <div  className="cartButtoncontainer" onClick={()=>navigator(cart)}>
+        <CartCount className="cartCount">{getTotalCartQuantity()}</CartCount>
       <span className="cartButton"></span>
       <span className="cartText">Cart</span>
       </div>

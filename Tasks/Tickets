@@ -1,3 +1,20 @@
-HBH-10001
-HBH-10002- cart page refactoring and bug fix in checkout page
-HBH-10003 - User cart list data capture, store and retrieve
+HBH-10001 - jwt token creatino and authentication for login page - done 
+HBH-10002- cart page refactoring and bug fix in checkout page -done
+HBH-10003 -User cart list data capture, store and retrieve - done
+
+ Assinged to bindu
+HBH-1011 - deploy java backend to aws elasti bean 
+  sub task 1: create s3 bucket, upload jar file and connect to public acl
+  sub task 2: create ec2 instance, instal java and run instance  
+HBH = 1012 - store user orders in orders table(link user id, product name and quanity,total order amount)
+HBH-1004 - Search functionality backend implementation
+HBH-1005 - Search functionality frontend implementation
+HBH-1006 - Individual product page with product id as route path - front end
+HBH-1007 - payment page integration with Razorpay - front end
+HBH-1008 - payment page integration with Razorpay - back end
+HBH-1009 - Code refactoring
+HBH-1010 - portfolio page
+
+
+
+

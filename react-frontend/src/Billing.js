@@ -15,11 +15,11 @@ function Billing(props) {
 
   return (
     <div className="billing-details">
-      <div class="card">
+      <div class="">
         <div class="container">
           <table>
             <tr>
-              <th>S.no</th>
+              <th>S.No</th>
               <th>Product</th>
               <th>Price</th>
               <th>Quantity</th>
@@ -27,7 +27,6 @@ function Billing(props) {
             </tr>
             {productsData
               ? productsData?.map((product) => {
-                //   let key = Number(key1);
 
                   if (
                     
@@ -43,11 +42,10 @@ function Billing(props) {
                       <tr>
                         <td>{sno}</td>
                         <td>{product.name}</td>
-                        <td>{product.price}</td>
-                        <td>{product.cartQuantity}</td>
+                        <td>₹{product.price}</td>
+                        <td>{product.cartQuantity}</td>                         
                         <td>
-                          Rs.{" "}
-                          {product.cartQuantity * product.price}
+                        ₹{" "} {product.cartQuantity * product.price}
                         </td>
                       </tr>
                     );
@@ -64,7 +62,7 @@ function Billing(props) {
               <td></td>
               <td></td>
               <td>
-                <b>Rs. {totalAmount}</b>
+                <b>₹{totalAmount}</b>
               </td>
             </tr>
 
