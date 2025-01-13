@@ -11,7 +11,7 @@ const Cart = ({ productDetails }) => {
   const { image, name, price, cartQuantity, id } = productsData;
   const dispatch = useDispatch();
 
-  const handleRemoveProduct = () => {
+  const handleRemoveProduct = (id) => {
     const updatedProductList = productsData?.filter(
       (product) => product.id !== id
     );
@@ -75,8 +75,8 @@ const Cart = ({ productDetails }) => {
                 +
               </button>
             </div>
-            <button className="deleteFromCartButton" onClick={handleRemoveProduct}>
-              Delete
+            <button className="deleteFromCartButton" onClick={()=>handleRemoveProduct(product?.id)}>
+              Remove
             </button>
           </div>
         </div>
