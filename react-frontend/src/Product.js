@@ -12,7 +12,7 @@ function Product() {
   const productsData = useSelector(productsDataSelector);
   const fetchProducts = () => {
     Axios.get(
-      `${process.env.REACT_APP_SPRINGBOOT_SERVER_PORT_URL}/api/products`,
+      `${process.env.REACT_APP_NODE_SERVER_PORT_URL}/api/products/getProducts`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -118,31 +118,21 @@ function Product() {
                     </button>
                   </p>
                 ) : (
-                  <>
-                    <button
-                      className="incrementDecrementButton"
-                      onClick={() => increment(product)}
-                    >
-                      +
-                    </button>
-
-                    <button
-                      className="incrementDecrementButton"
-                      onClick={() => decrement(product)}
-                    >
-                      -
-                    </button>
-
-                    <h6 className="quantityTitle">
-                      Quantity Added :{product.cartQuantity}
-                    </h6>
-                    {/* <button
-                    className="viewCartButton"
-                    onClick={() => props.handleClick("cart")}
+                  <div class="counter-button">
+                  <button
+                    class="quantityButton minus"
+                    onClick={() => decrement(product, productsData)}
                   >
-                    View Cart
-                  </button> */}
-                  </>
+                    -
+                  </button>
+                  <span class="quantityValue">{product?.cartQuantity}</span>
+                  <button
+                    class="quantityButton plus"
+                    onClick={() => increment(product, productsData)}
+                  >
+                    +
+                  </button>
+                </div>
                 )}
               </div>
             </div>

@@ -16,7 +16,13 @@ const getProducts = (req, res) => {
     const userId = decoded.sub;
 
     const query =
-      `SELECT * FROM products LEFT JOIN cart ON products.id = cart.product_id AND cart.user_id = ?`;
+      `SELECT 
+       products.id AS id,
+       products.image As image,
+    products.name AS name,
+    products.price AS price,
+    IFNULL(cart.quantity, 0) AS cartQuantity
+      FROM products LEFT JOIN cart ON products.id = cart.product_id AND cart.user_id = ?`;
     db.query(query,[userId], (err, results) => {
       if (err) {
         console.error("Error fetching users:", err.message);
