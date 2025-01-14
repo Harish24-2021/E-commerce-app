@@ -2,7 +2,7 @@ import { Box, Button, Link, TextField, Typography } from "@mui/material";
 import Axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-
+import bcrypt from "bcryptjs";
 
 const Login = ({setNavBarKey,handleClick}) => {
   const [email, setEmail] = useState("");
@@ -11,9 +11,20 @@ const Login = ({setNavBarKey,handleClick}) => {
   const [token, setToken] = useState("");
   const navigate = useNavigate()
   console.log(process.env.LARAVEL_SERVER_PORT_URL)
+
+
+const encryptPassword = async (password) => {
+  try {
+    const saltRounds = 10; // Number of salt rounds
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    return hashedPassword;
+  } catch (error) {
+    console.error("Error encrypting password:", error);
+  }
+};
   const handleSubmit = (event) => {
     event.preventDefault();
-    Axios.post(`${process.env.REACT_APP_SPRINGBOOT_SERVER_PORT_URL}/api/auth/login`, {
+    Axios.post(`${process.env.REACT_APP_NODE_SERVER_PORT_URL}/api/auth/login`, {
       username: email,
       password: password
     })
