@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 const { getProducts } = require('./controllers/productController');
 
 const app = express();
@@ -17,6 +18,7 @@ const router = express.Router()
 
 app.use('/api/products', productRoutes);
 app.use('/api/auth', userRoutes)
+app.use('/api/cart', cartRoutes);
 
 app.get("/",(req,res)=> {
     res.json({ message: "Hello World!"});

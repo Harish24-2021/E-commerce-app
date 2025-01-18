@@ -68,11 +68,11 @@ function Product() {
       return product;
     });
     dispatch(setProductsData(updatedProductList));
-    Axios.post(`${process.env.REACT_APP_SPRINGBOOT_SERVER_PORT_URL}/api/cartData`,
-      [{
-        "productId": String(id),
+    Axios.post(`${process.env.REACT_APP_NODE_SERVER_PORT_URL}/api/cart/updateCart`,
+      {
+        "product_id": String(id),
         "quantity": cartQuantity
-      }] ,
+      } ,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

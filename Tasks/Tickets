@@ -1,3 +1,7 @@
+
+Maintanance/Cleanup:
+=> serparate out front and backends in to Individual serparate projects 
+
 HBH-10001 - jwt token creatino and authentication for login page - done 
 HBH-10002- cart page refactoring and bug fix in checkout page -done
 HBH-10003 -User cart list data capture, store and retrieve - done
